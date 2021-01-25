@@ -51,23 +51,22 @@ def test_q8(q8):
     Output = [9,5,1]
     assert np.array_equal(q8(A), Output), 'Question 8 Failed!\nInput:\n%r\nCorrect Answer:\n%r\nYour Answer:\n%r' % (A, Output, q8(A))
     print('Question 8 Passed!')
-
-
+    
 def test_q9(q9):
-    A = np.array([[1,2,3],[4,5,6]])
-    B = np.array([[1,1],[1,1],[1,1]])
-    Output = np.array([[1,2,3],[4,5,6],[0,0,0]]), np.array([[1,1,0],[1,1,0],[1,1,0]])
-    assert np.array_equal(q9(A,B), Output), 'Question 9 Failed!\nInput:\nA: %r\nB: %r\nCorrect Answer:\n%r\nYour Answer:\n%r' % (A, B, Output, q9(A,B))
-    print('Question 9 Passed!')
-
-def test_q10(q10):
     A = np.array([[1,1,1],[1,1,1],[1,1,1] ,[1,1,1]])
     B = np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12]])
     #p = 2
     p = 1
     Output = np.array([[1, 1, 1, 4, 8, 12]])
     #Output = np.array([[1,1,1,3,7,11],[1,1,1,4,8,12]])
-    assert np.array_equal(q10(A,B,p), Output), 'Question 10 Failed!\nInput:\nA: %r\nB: %r\np: 2\nCorrect Answer:\n%r\nYour Answer:\n%r' % (A, B, Output, q10(A,B,p))
+    assert np.array_equal(q9(A,B,p), Output), 'Question 9 Failed!\nInput:\nA: %r\nB: %r\np: %r\nCorrect Answer:\n%r\nYour Answer:\n%r' % (A, B, p, Output, q9(A,B,p))
+    print('Question 9 Passed!')
+
+def test_q10(q10):
+    A = np.array([[1,2,3],[4,5,6]])
+    B = np.array([[1,1],[1,1],[1,1]])
+    Output = np.array([[1,2,3],[4,5,6],[0,0,0]]), np.array([[1,1,0],[1,1,0],[1,1,0]])
+    assert np.array_equal(q10(A,B), Output), 'Question 10 Failed!\nInput:\nA: %r\nB: %r\nCorrect Answer:\n%r\nYour Answer:\n%r' % (A, B, Output, q10(A,B))
     print('Question 10 Passed!')
 
 
