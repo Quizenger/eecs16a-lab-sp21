@@ -6,6 +6,19 @@ from PIL import Image
 from IPython import display
 
 # Inputs
+#  `H`: masking matrix H
+#  `img_width`: Image width
+#  `img_height`: Image height
+# Outputs
+#  Prints whether H has the correct dimensions
+def test_H_dimension(H, img_height, img_width):
+    if H.shape[0] == H.shape[1] and H.shape[0] == img_height * img_width:
+        print("The masking matrix has correct dimensions.")
+    else:
+        print("The masking matrix DOES NOT have correct dimensions.")
+
+
+# Inputs
 #  `avg1sPerRow`: Average number of illuminated (white) pixels per mask (row of `H`)
 #  `X`: Image width
 #  `Y`: Image height
