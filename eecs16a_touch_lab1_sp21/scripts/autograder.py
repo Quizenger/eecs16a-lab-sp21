@@ -31,14 +31,15 @@ q_exp = {"3a-1" : "The multimeter is measuring the voltage across a single node 
             "3c-2a-soft" : "Vz = u2 - u0 = 2.13V - 0V = 2.13V",
             "3c-2b-soft" : "Vy = u1 - u2 = 3.2V - 2.13V = 1.07V",
             "3c-1a-hard" : "The ground node is defined to be 0V.",
-            "3c-1b-hard" : "u1 is connected directly to the positive end of the voltage source, so it must be 3.3V.",
+            "3c-1b-hard" : "u1 is connected directly to the positive terminal of the voltage source, so it must be 3.3V.",
             "3c-1c-hard" : "You should have gotten something different. Please check your circuit and where you're measuring.",
             "3c-2a-hard" : "Vz = u2 - u0 = 2.2V - 0V = 2.2V",
             "3c-2b-hard" : "Vy = u1 - u2 = 3.3V - 2.2V = 1.1V"}
 
-def autograde(answer=-1, question="3a-1", no_check=False):
+def autograde(answer=-1, question="3a-1", no_check=False, no_exp_if_cor=False):
     tolerance_pct = 5.0 #error threshold percent
     answer = float(answer)
+    correct = True
     if no_check:
         pass
     elif q_ans[question] == 0 and answer == 0:
@@ -47,4 +48,8 @@ def autograde(answer=-1, question="3a-1", no_check=False):
         print("Correct!")
     else:
         print("Sorry, that's not quite right.")
-    print(q_exp[question])
+        correct = False
+    if no_exp_if_cor and correct:
+        pass
+    else:
+        print(q_exp[question])
