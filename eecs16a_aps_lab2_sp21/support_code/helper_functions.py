@@ -586,7 +586,7 @@ def construct_system_test(construct_system):
     A_ref, b_ref = labDemo.construct_system(speakers, TDOA, labDemo.V_AIR, isac=2)
     
     # Partial Tests
-    pritn()
+    print()
     print("Your A matrix:")
     print(A)
     print("Reference A matrix:")
