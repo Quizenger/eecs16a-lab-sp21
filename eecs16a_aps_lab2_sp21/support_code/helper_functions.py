@@ -561,12 +561,12 @@ def plot_speakers_demo():
 
 def construct_system_test(construct_system):
 
-
+    coordinate = [1.2, 3.6]
     labDemo = APS('new_data.npy', testing = 'Test', ms = True)
-    labDemo.generate_raw_signal([1.2,3.6])
+    labDemo.generate_raw_signal(coordinate)
     _, separated = labDemo.post_processing(labDemo.rawSignal)
     labDemo.identify_offsets(separated)
-    labDemo.signal_to_distances(((1.2)**2+(3.6)**2)**0.5/340.29)
+    labDemo.signal_to_distances(((coordinate[0])**2+(coordinate[1])**2)**0.5/340.29)
     distances = labDemo.distancesPost[:4]
     TDOA = labDemo.offsets_to_tdoas()
     v = labDemo.V_AIR
@@ -574,11 +574,30 @@ def construct_system_test(construct_system):
 
 
     # Plot the linear relationship of the microphone and speakers.
-    isac=1; #index of the beacon to be sacrificed
-    A, b = construct_system(speakers,TDOA,labDemo.V_AIR)
+    # isac = index of the beacon to be sacrificed
+    A, b = construct_system(speakers, TDOA, labDemo.V_AIR, isac=2)
     for i in range(len(b)):
-        print ("Row %d: %.f should equal %.f"%(i, A[i][0] * 1.2 + A[i][1] * 3.6, b[i]))
-
+        
+        calc_value = A[i][0] * coordinate[0] + A[i][1] * coordinate[1]
+        abs_err = abs(b[i] - calc_value)
+        status = 'failed' if abs_err > 0.5 else 'passed'
+        print("Row %d: %.f should equal %.f. Test %s."%(i, calc_value, b[i], status))
+    
+    A_ref, b_ref = labDemo.construct_system(speakers, TDOA, labDemo.V_AIR, isac=2)
+    
+    # Partial Tests
+    pritn()
+    print("Your A matrix:")
+    print(A)
+    print("Reference A matrix:")
+    print(A_ref)
+    
+    print()
+    print("Your b vector:")
+    print(b)
+    print("Reference b vector:")
+    print(b_ref)
+        
 def least_squares_test(least_squares):
     A = np.array(((1,1),(1,2),(1,3),(1,4)))
     b = np.array((6, 5, 7, 10))
